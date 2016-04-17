@@ -1,0 +1,43 @@
+# Site settings
+title: PyLixm'Wiki
+description: 'To be a better man!'
+url: 'http://www.iwebsouls.com'
+baseurl: '/'
+# google_analytics: 'UA-XXXXXX-X'
+disqus_shortname: pylixm
+#youyan_analytics: pylixm
+
+encoding: utf-8
+
+author:
+  name: 'pylixm'
+  email: pylixm@gmail.com
+  #twitter_username: joshgerdes
+  #facebook_username: joshgerdes
+  github_username:  pylixm
+  #linkedin_username:  joshgerdes
+
+defaults:
+  -
+    scope:
+      path: ''
+      type: 'posts'
+    values:
+        layout: 'post'
+
+# Build settings
+destination: _site
+paginate: 10
+permalink: /:year/:month/:day/:title/
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  # use Github Flavored Markdown
+  input: GFM
+  # do not replace newlines by <br>s
+  hard_wrap: false
+
+gems: [jekyll-paginate]
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png']
+

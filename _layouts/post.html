@@ -1,0 +1,36 @@
+---
+layout: default
+comments: true
+---
+<article class="post-container post-container--single">
+  <header class="post-header">
+    <h2 class="post-title">{{ page.title }}</h2>
+    <div class="post-meta">
+      <time datetime="{{ page.date | date: "%-d %b %Y" }}" class="post-meta__date date">{{ page.date | date: "%-d %b %Y" }}</time> 
+      &#8226; <span class="post-meta__tags">on {% for tag in page.tags %}<a href="{{ site.baseurl }}tags/#{{ tag }}">{{ tag }}</a> {% endfor %}</span>
+    </div>
+  </header>
+  
+  {% if page.old_url%}
+  <ul>
+    <li>
+      原文出处：<a href="{{ page.old_url }}">{{ page.old_url }}</a>
+    </li>
+  </ul>
+  {% endif %}
+  <section class="post">
+    {{ content }}
+  </section>
+  
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- post-1 -->
+<ins class="adsbygoogle"
+    style="display:inline-block;width:728px;height:90px"
+    data-ad-client="ca-pub-4123451200170531"
+    data-ad-slot="3457441401"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+ </article>
+{% if page.comments != false %}{% include comments.html %}{% endif %}
