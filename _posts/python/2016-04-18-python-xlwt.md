@@ -176,11 +176,19 @@ workbook.save('Excel_Workbook.xls')
 {% endhighlight %}
 
 TODO: Things Left to Document
+
 - Panes -- separate views which are always in view
+
 - Border Colors (documented above, but not taking effect as it should)
+
 - Border Widths (document above, but not working as expected)
+
 - Protection
+
 - Row Styles
+
 - Zoom / Manification
+
 - WS Props?
+
 Source Code for reference available at: https://secure.simplistix.co.uk/svn/xlwt/trunk/xlwt/
