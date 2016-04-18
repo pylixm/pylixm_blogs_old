@@ -4,8 +4,9 @@ title : python xlrd和xlwt 使用记录
 category : python-lib
 date : 2016-04-18
 tags : [python, xlwt, xlrd ]
-old_url: http://www.youlikeprogramming.com/2011/04/examples-generating-excel-documents-using-pythons-xlwt/
 ---
+
+![TOC]
 
 记录下xlrd和xlwt的使用demo :
 
@@ -192,3 +193,89 @@ TODO: Things Left to Document
 - WS Props?
 
 Source Code for reference available at: https://secure.simplistix.co.uk/svn/xlwt/trunk/xlwt/
+
+#### 另一种使用方式 
+
+{% highlight python %}
+import xlwt;
+
+#styleBlueBkg = xlwt.easyxf('font: color-index red, bold on');
+#styleBlueBkg = xlwt.easyxf('font: background-color-index red, bold on');
+#styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour red;');
+#styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour blue;');
+#styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour light_blue;');
+#styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour pale_blue;');
+#styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour dark_blue;');
+#styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour dark_blue_ega;');
+#styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour ice_blue;');
+styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour ocean_blue; font: bold on;'); # 80% like
+#styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour sky_blue;');
+    
+    
+#blueBkgFontStyle = xlwt.XFStyle()
+#blueBkgFontStyle.Pattern = blueBackgroundPattern;
+#styleBlueBkg = blueBkgFontStyle;
+    
+styleBold   = xlwt.easyxf('font: bold on');
+    
+wb = xlwt.Workbook();
+ws = wb.add_sheet('realPropertyInfo');
+    
+ws.write(0, 0, "Sequence",  styleBlueBkg);
+ws.write(0, 1, "MapID",     styleBlueBkg);
+ws.write(0, 2, "Owner1",    styleBold);
+ws.write(0, 3, "Owner2",    styleBold);
+    
+wb.save(excelFilename);
+{% endhighlight %}
+
+
+
+### xlrd 
+
+简单实例：
+
+{% highlight python %}
+#导入
+import xlrd
+#打开excel
+data = xlrd.open_workbook('demo.xls') #注意这里的workbook首字母是小写
+#查看文件中包含sheet的名称
+data.sheet_names()
+#得到第一个工作表，或者通过索引顺序 或 工作表名称
+table = data.sheets()[0]
+table = data.sheet_by_index(0)
+table = data.sheet_by_name(u'Sheet1')
+#获取行数和列数(实际含有数据的)
+nrows = table.nrows
+ncols = table.ncols
+#获取整行和整列的值（数组）
+table.row_values(i)
+table.col_values(i)
+#循环行,得到索引的列表
+for rownum in range(table.nrows):
+print table.row_values(rownum)
+#单元格
+cell_A1 = table.cell(0,0).value
+cell_C4 = table.cell(2,3).value
+#分别使用行列索引
+cell_A1 = table.row(0)[0].value
+cell_A2 = table.col(1)[0].value
+#简单的写入
+row = 0
+col = 0
+ctype = 1 # 类型 0 empty,1 string, 2 number, 3 date, 4 boolean, 5 error
+value = 'lixiaoluo'
+xf = 0 # 扩展的格式化 (默认是0)
+table.put_cell(row, col, ctype, value, xf)
+table.cell(0,0) # 文本:u'lixiaoluo'
+table.cell(0,0).value # 'lixiaoluo'
+{% endhighlight %}
+
+
+--- 
+
+### 参考
+
+[http://www.crifan.com/python_xlwt_set_cell_background_color/](http://www.crifan.com/python_xlwt_set_cell_background_color/)
+[http://blog.sina.com.cn/s/blog_5357c0af01019gjo.html](http://blog.sina.com.cn/s/blog_5357c0af01019gjo.html)
